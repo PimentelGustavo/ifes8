@@ -36,7 +36,7 @@
 
 Este repositório é um **fork atualizado** da classe `ifes8`, originalmente desenvolvida pelo Prof. Jefferson O. Andrade. A classe é uma customização da `abntex2` (que, por sua vez, estende a classe `memoir`) e permite a criação de trabalhos acadêmicos completos — com **todos os elementos pré-textuais, textuais e pós-textuais** — em plena conformidade com as normas institucionais do Ifes.
 
-O projeto inclui um **exemplo funcional de TCC** (`ifes8-tcc-ex.tex`) que serve ao mesmo tempo como **manual de uso** e como **modelo** para os estudantes.
+O projeto inclui um **exemplo funcional de TCC** (`ifes8-tcc-ex.tex`) e um **modelo de artigo para a Revista Ifes Ciência** (`revista-ifes-ciencia-ex.tex`) que servem ao mesmo tempo como manuais de uso e modelos para os estudantes e pesquisadores.
 
 ## 🚀 Comece Rapidamente
 
@@ -138,13 +138,17 @@ ifes-tcc-norms/
 │   ├── ifes8.org                # Log de revisões (Org-Mode)
 │   ├── README.org               # Documentação original da classe
 │   ├── LICENSE                  # Licença LPPL v1.3c
-│   └── exemplo-tcc/
-│       ├── ifes8-tcc-ex.tex     # 📝 Exemplo/modelo de TCC
-│       ├── ifes8-tcc-ex.pdf     # PDF compilado do exemplo
-│       ├── ifes8.cls            # Symlink → ../ifes8.cls
-│       ├── configlistings.tex   # Configuração de listagens de código
-│       ├── referencias.bib      # Base de referências bibliográficas
-│       └── pics/                # Imagens do exemplo
+│   ├── exemplo-tcc/
+│   │   ├── ifes8-tcc-ex.tex     # 📝 Exemplo/modelo de TCC
+│   │   ├── ifes8-tcc-ex.pdf     # PDF compilado do exemplo
+│   │   ├── ifes8.cls            # Symlink → ../ifes8.cls
+│   │   ├── configlistings.tex   # Configuração de listagens de código
+│   │   ├── referencias.bib      # Base de referências bibliográficas
+│   │   └── pics/                # Imagens do exemplo TCC
+│   └── exemplo-revista-ifes-ciencia/
+│       ├── revista-ifes-ciencia-ex.tex # 📰 Modelo para a Revista Ifes Ciência
+│       ├── revista-ifes-ciencia-ex.pdf # PDF compilado do exemplo
+│       └── pics/                # Logotipos e imagens da revista
 ├── SDD/                         # Documentação de desenvolvimento (Spec-Driven)
 │   ├── constituition.md
 │   ├── contract.md
@@ -165,12 +169,13 @@ ifes-tcc-norms/
 
 ## 🎓 Tipos de Trabalho Suportados
 
-A classe suporta nativamente a formatação para:
+A classe e os exemplos deste repositório suportam nativamente a formatação para:
 
 - 📘 **Trabalhos de Conclusão de Curso (TCC)**
 - 📗 **Trabalhos Finais de Curso (TFC)**
 - 📕 **Dissertações de Mestrado**
 - 📙 **Teses de Doutorado**
+- 📰 **Artigos Científicos (Revista Ifes Ciência)**
 
 O exemplo inclui demonstrações de: algoritmos, tabelas no padrão IBGE, figuras, diagramas TikZ, equações, citações diretas/indiretas e listagens de código-fonte.
 
