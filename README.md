@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./media/logo-ifes.png" alt="Logo Ifes" width="180" height="180"/>
+    <img src="logo-ifes.svg" alt="Logo Ifes" width="180" height="180"/>
     <h1>📐 Classe LaTeX Ifes — Normas 2024</h1>
     <h3><em>Formate seu trabalho acadêmico em conformidade com as normas do Ifes.</em></h3>
 </div>
