@@ -2,7 +2,7 @@
 %%% Instituto Federal do Espírito Santo (Ifes). Em conformidade com as
 %%% normas estabelecidas no documento “Normas para Apresentação de
 %%% Trabalhos Acadêmicos e Científicos: Documento Impresso e/ou
-%%% Digital”, 8ª edição -- nov/2017.
+%%% Digital”, 9ª edição -- 2024.
 %%% 
 %%% Esta classe é baseada na classe abnTeX2 versão 1.9.6 de 26 de
 %%% fevereiro de 2016 [http://www.abntex.net.br/], que por sua vez é
@@ -12,10 +12,12 @@
 %%% https://github.com/quigonjeff/ifes8
 %%% 
 %%% Autor: Prof. Jefferson O. Andrade <jefferson.andrade@ifes.edu.br>
-%%% Data: 2018-02-22
+%%% Atualizado por: Gustavo Cardoso Pimentel em 11 de agosto de 2026 (Adequação às normas Ifes 2024 - 9ª edição)
+%%% Data de criação: 2018-02-22 | Data de atualização: 2026-08-11
+%%% 
 
 \NeedsTeXFormat{LaTeX2e} 
-\ProvidesClass{ifes8}[2021/07/01 Classe de trabalhos academicos do Ifes]
+\ProvidesClass{ifes8}[2026/08/11 v9.0 Classe de trabalhos academicos do Ifes (Normas 2024)]
 
 \RequirePackage{ifthen}
 
@@ -63,7 +65,7 @@
 \setlength{\parindent}{0mm}
 
 %%% Espaçamento entre parágrafos
-\setlength{\parskip}{12pt}
+\setlength{\parskip}{15pt}
 
 %%% Espaçamento entre itens de listas
 \setlist{parsep=12pt,leftmargin=1.2em}

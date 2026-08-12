@@ -1,6 +1,6 @@
 #+TITLE: Classe LaTeX para Documentos Acadêmicos do Ifes
-#+SUBTITLE: Segundo as Normas para Apresentação de Trabalhos Acadêmicos e Científicos, 8ª edição revista e ampliada
-#+AUTHOR: Prof. Dr. Jefferson O. Andrade
+#+SUBTITLE: Segundo as Normas para Apresentação de Trabalhos Acadêmicos e Científicos, 9ª edição revista e ampliada
+#+AUTHOR: Prof. Dr. Jefferson O. Andrade (Atualizado por Gustavo Cardoso Pimentel em 11 de agosto de 2026)
 #+EMAIL: jefferson.andrade@ifes.edu.br
 #+LATEX_CLASS: scrartcl
 #+LATEX_CLASS_OPTIONS: [a4paper,11pt]
@@ -20,6 +20,13 @@
   isso no texto abaixo só aparecem os títulos das atividades sem os seus
   respectivos status.
   
+
+* Revisão de 2026-08-11 (Gustavo Cardoso Pimentel)
+
+** DONE Atualização para as Normas Ifes 2024 (9ª edição)
+   - Ajuste do espaçamento de parágrafo (`\parskip=15pt`) e remoção do recuo (`\parindent=0mm`).
+   - Inclusão dos campos obrigatórios do Bibliotecário e CRB na Ficha Catalográfica.
+   - Atualização das referências normativas para ABNT NBR 10520:2023 e Ifes 2024 (9ª Edição).
 
 * Revisão em Curso
 
@@ -82,7 +89,7 @@ prof.ª tem recebido do setor de Biblioteca do Campus Serra do Ifes.
 
    - State "DONE"       from "TODO"       [2020-09-03 qui 16:31]
    #+begin_example
-   \ProvidesClass{ifes8}[2018/02/22 Classe de trabalhos acadêmicos do Ifes]
+   \ProvidesClass{ifes8}[2026/08/11 v9.0 Classe de trabalhos academicos do Ifes (Normas 2024)]
    #+end_example
 
    - Este caractere as vezes causa erros de compilação.
