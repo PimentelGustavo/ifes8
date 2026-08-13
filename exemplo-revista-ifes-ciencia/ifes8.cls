@@ -104,9 +104,10 @@
 %%% No modo revista usa-se mathptmx (Times New Roman).
 %%% No modo TCC usa-se Latin Modern (times) ou Helvética (arial).
 \RequirePackage[T1]{fontenc}
+\PassOptionsToPackage{expansion=false}{microtype}
+\RequirePackage[expansion=false]{microtype}
 \ifthenelse{\boolean{IFESrevista}}{%
   \RequirePackage{mathptmx}
-  \RequirePackage[expansion=false]{microtype}
 }{%
   \ifthenelse{\boolean{IFEStimes}}{%
     \RequirePackage{lmodern}
