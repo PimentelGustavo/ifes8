@@ -17,7 +17,7 @@
 %%% 
 
 \NeedsTeXFormat{LaTeX2e} 
-\ProvidesClass{ifes8}[2026/08/11 v9.0 Classe de trabalhos academicos do Ifes (Normas 2024)]
+\ProvidesClass{ifes8}[2026/08/13 v9.1 Classe de trabalhos academicos do Ifes (Normas 2024)]
 
 \RequirePackage{ifthen}
 
@@ -28,8 +28,12 @@
 \newboolean{IFEStimes}
 \setboolean{IFEStimes}{true}
 
+\newboolean{IFESrevista}
+\setboolean{IFESrevista}{false}
+
 \DeclareOption{times}{\setboolean{IFEStimes}{true}}
 \DeclareOption{arial}{\setboolean{IFEStimes}{false}}
+\DeclareOption{revista}{\setboolean{IFESrevista}{true}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{abntex2}}
 \ProcessOptions\relax
@@ -52,20 +56,43 @@
 \checkandfixthelayout
 
 
-%%% Redefinição dos cabeçalhos
-\makeevenhead{abntheadings}{\ABNTEXfontereduzida\thepage}{}{}
-\makeoddhead{abntheadings}{}{}{\ABNTEXfontereduzida\thepage}
-\makeheadrule{abntheadings}{0pt}{0pt}
+\ifthenelse{\boolean{IFESrevista}}{%
+  %%% ================================================================
+  %%% Modo REVISTA: cabeçalhos via fancyhdr, parágrafos com recuo,
+  %%% espaçamento simples, tolerância alta para colunas estreitas.
+  %%% ================================================================
+  \RequirePackage{fancyhdr}
+  \RequirePackage{indentfirst}
+  \RequirePackage{needspace}
+  \pagestyle{fancy}
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  %% Parágrafos: recuo 1,25 cm, 6 pt após, espaçamento simples
+  \setlength{\parindent}{1.25cm}
+  \setlength{\parskip}{6pt}
+  \linespread{1.0}
+  %% Espaçamento entre colunas
+  \setlength{\columnsep}{1.25cm}
+  %% Tolerância para justificação em colunas estreitas
+  \tolerance=2000 \emergencystretch=2.5em \hbadness=10000 \sloppy
+}{%
+  %%% ================================================================
+  %%% Modo TCC (padrão): cabeçalhos abnTeX, sem recuo, parskip 15pt
+  %%% ================================================================
+  %%% Redefinição dos cabeçalhos
+  \makeevenhead{abntheadings}{\ABNTEXfontereduzida\thepage}{}{}
+  \makeoddhead{abntheadings}{}{}{\ABNTEXfontereduzida\thepage}
+  \makeheadrule{abntheadings}{0pt}{0pt}
+  %%% Configuração do alinhamento da 1ª linha dos parágrafos.
+  \setlength{\parindent}{0mm}
+  %%% Espaçamento entre parágrafos
+  \setlength{\parskip}{15pt}
+}
 
 
 %%% Configuração do espaçamento entre títulos e texto
 \setlength{\afterchapskip}{0pt}
-
-%%% Configuração do alinhamento da 1ª linha dos parágrafos.
-\setlength{\parindent}{0mm}
-
-%%% Espaçamento entre parágrafos
-\setlength{\parskip}{15pt}
 
 %%% Espaçamento entre itens de listas
 \setlist{parsep=12pt,leftmargin=1.2em}
@@ -73,16 +100,21 @@
 %%% Pelas normas do Ifes, as equações devem ser alinhadas à esquerda
 \setlength{\mathindent}{0pt}
 
-%%% Configura a fonte para serifada (Latin Modern) ou sem serifa
-%%% (Helvética) conforme o valor da variável `times'. O padrão é
-%%% `times=true'. 
+%%% Configura a fonte do documento.
+%%% No modo revista usa-se mathptmx (Times New Roman).
+%%% No modo TCC usa-se Latin Modern (times) ou Helvética (arial).
 \RequirePackage[T1]{fontenc}
-\ifthenelse{\boolean{IFEStimes}}{
-  \RequirePackage{lmodern}
-}{
-  \RequirePackage{helvet}
-  \RequirePackage[helvet]{sfmath}
-  \renewcommand{\familydefault}{\sfdefault}
+\ifthenelse{\boolean{IFESrevista}}{%
+  \RequirePackage{mathptmx}
+  \RequirePackage[expansion=false]{microtype}
+}{%
+  \ifthenelse{\boolean{IFEStimes}}{%
+    \RequirePackage{lmodern}
+  }{%
+    \RequirePackage{helvet}
+    \RequirePackage[helvet]{sfmath}
+    \renewcommand{\familydefault}{\sfdefault}
+  }
 }
 
 
@@ -106,17 +138,6 @@
 \renewcommand{\ABNTEXsubsubsubsectionfontsize}{\normalsize}
 
 
-%%% Converte o título das seções para maiúsculas na TOC.
-%%% Infelizmente, não funciona para seções. Vide manual da classe memoir.
-% \makeatletter
-% \ifthenelse{\boolean{ABNTEXsumario-abnt-6027-2012}}{
-%   \settocpreprocessor{section}{%
-%     \let\tempf@rtoc\f@rtoc%
-%     \def\f@rtoc{%
-%       \texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
-%   }
-% }{}
-% \makeatother
 
 \addtolength{\cftlastnumwidth}{-1em}
 
@@ -368,10 +389,16 @@
 %%% Definição de comando específicos da classe do Ifes.
 %%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-%%% O código abaixo é um RTP (Recurso Técnico Provisório, vulgo gambiarra) para
-%%% fazer com que os títulos de seções ficassem em maiúsculas na TOC (Sumário).
-\let\ifesoldsection\section
-\renewcommand{\section}[1]{\ifesoldsection{\uppercase{#1}}}
+%%% Converte o título das seções para maiúsculas no Sumário (TOC) usando o preprocessador da classe memoir
+\makeatletter
+\ifthenelse{\boolean{ABNTEXsumario-abnt-6027-2012}}{%
+  \settocpreprocessor{section}{%
+    \let\tempf@rtoc\f@rtoc%
+    \def\f@rtoc{%
+      \texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
+  }%
+}{}
+\makeatother
 
 %%% Define o comando \imprimesumario
 \providecommand{\imprimirsumario}{}
@@ -410,6 +437,112 @@
 %%% Define o comando \orientadora
 \providecommand{\coorientadora}{}
 \renewcommand{\coorientadora}[2][\coorientadoraname]{\coorientador[#1]{#2}}
+
+
+%%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%%% Comandos específicos do modo REVISTA (Revista Ifes Ciência)
+%%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\makeatletter
+\ifIFESrevista
+  %
+  %%% Pacotes necessários para o modo revista
+  \RequirePackage{xcolor}
+  \RequirePackage{graphicx}
+  %
+  %%% Cor institucional
+  \definecolor{ifesteal}{HTML}{004240}
+  %
+  %%% Comandos de metadados do artigo
+  \newcommand{\@revistaissn}{2359-4799}
+  \newcommand{\revistaissn}[1]{\renewcommand{\@revistaissn}{#1}}
+  %
+  \newcommand{\@revistavolume}{}
+  \newcommand{\revistavolume}[1]{\renewcommand{\@revistavolume}{#1}}
+  %
+  \newcommand{\@revistadoi}{}
+  \newcommand{\revistadoi}[1]{\renewcommand{\@revistadoi}{#1}}
+  %
+  \newcommand{\@revistapaginas}{XX-YY}
+  \newcommand{\revistapaginas}[1]{\renewcommand{\@revistapaginas}{#1}}
+  %
+  \newcommand{\@revistabanner}{pics/banner_ifes_ciencia.png}
+  \newcommand{\revistabanner}[1]{\renewcommand{\@revistabanner}{#1}}
+  %
+  \newcommand{\@revistalogo}{pics/logo_ifes_ciencia.png}
+  \newcommand{\revistalogo}[1]{\renewcommand{\@revistalogo}{#1}}
+  %
+  \newcommand{\@orcidicon}{pics/orcid_icon.png}
+  \newcommand{\orcidicon}[1]{\renewcommand{\@orcidicon}{#1}}
+  %
+  \newcommand{\@artigotitulo}{}
+  \newcommand{\artigotitulo}[1]{\renewcommand{\@artigotitulo}{#1}}
+  %
+  \newcommand{\@datasubmissao}{XX/XX/XXXX}
+  \newcommand{\datasubmissao}[1]{\renewcommand{\@datasubmissao}{#1}}
+  %
+  \newcommand{\@dataaceitacao}{XX/XX/XXXX}
+  \newcommand{\dataaceitacao}[1]{\renewcommand{\@dataaceitacao}{#1}}
+  %
+  \newcommand{\@datapublicacao}{XX/XX/XXXX}
+  \newcommand{\datapublicacao}[1]{\renewcommand{\@datapublicacao}{#1}}
+  %
+  %%% Caixa colorida com número da página no cabeçalho
+  \newcommand{\ifespagebox}{%
+    \colorbox{ifesteal}{\textcolor{white}{\textbf{\thepage}}}%
+  }
+  \fancyhead[L]{\ifespagebox\hspace{4pt}\textbf{\@revistavolume}}
+  \fancyhead[R]{\raisebox{-0.15cm}{\includegraphics[height=1.05cm]{\@revistalogo}}}
+  %
+  %%% Ícone ORCID
+  \newcommand{\orcid}{\,\includegraphics[height=2.3mm]{\@orcidicon}}
+  %
+  %%% Comando para imprimir a capa do artigo (página 1)
+  \newcommand{\imprimircaparevista}{%
+    \thispagestyle{empty}%
+    \begin{flushright}
+      \colorbox{ifesteal}{%
+        \begin{minipage}{9.6cm}
+          \raggedleft\color{white}\bfseries\fontsize{13}{16}\selectfont
+          ISSN \@revistaissn\\[2pt]
+          \@revistavolume\ -- p. \@revistapaginas\\[2pt]
+          DOI:\@revistadoi
+        \end{minipage}%
+      }
+    \end{flushright}
+    \vspace{3mm}
+    \noindent\includegraphics[width=\textwidth]{\@revistabanner}
+    \vspace{12mm}
+  }
+  %
+  %%% Ambiente para o resumo gráfico (Graphical Abstract)
+  \newenvironment{graphicalabstract}{%
+    \begin{center}
+      \textbf{GRAPHICAL ABSTRACT}
+      \vspace{8mm}
+  }{%
+    \end{center}
+    \vspace{8mm}
+  }
+  %
+  %%% Comando para imprimir o título do artigo
+  \newcommand{\imprimirtituloartigo}{%
+    \begin{center}
+      {\Large\bfseries\@artigotitulo}
+    \end{center}
+    \vspace{6mm}
+  }
+  %
+  %%% Comando para imprimir as datas de submissão/aceitação/publicação
+  \newcommand{\imprimirdatasartigo}{%
+    \begin{center}
+      Article submitted in \@datasubmissao, accepted in \@dataaceitacao{}
+      and published in \@datapublicacao.
+    \end{center}
+  }
+  %
+\fi
+\makeatother
+%
 
 \endinput
 

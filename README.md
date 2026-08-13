@@ -34,9 +34,12 @@
 
 ## 📖 O que é este projeto? 
 
-Este repositório é um **fork atualizado** da classe `ifes8`, originalmente desenvolvida pelo Prof. Jefferson O. Andrade. A classe é uma customização da `abntex2` (que, por sua vez, estende a classe `memoir`) e permite a criação de trabalhos acadêmicos completos — com **todos os elementos pré-textuais, textuais e pós-textuais** — em plena conformidade com as normas institucionais do Ifes.
+Este repositório é um **fork atualizado** da classe `ifes8`, originalmente desenvolvida pelo Prof. Jefferson O. Andrade. A classe `ifes8.cls` dá suporte nativo tanto a **trabalhos acadêmicos** quanto a **artigos de periódico**:
 
-O projeto inclui um **exemplo funcional de TCC** (`ifes8-tcc-ex.tex`) e um **modelo de artigo para a Revista Ifes Ciência** (`revista-ifes-ciencia-ex.tex`) que servem ao mesmo tempo como manuais de uso e modelos para os estudantes e pesquisadores.
+- **Trabalhos acadêmicos (TCC, dissertação, tese)**: `\documentclass[times,english,brazilian]{ifes8}`
+- **Artigos da Revista Ifes Ciência**: `\documentclass[revista,english]{ifes8}`
+
+Ambas as modalidades estão em conformidade com a 9ª edição (2024) das normas do Ifes. O projeto inclui um **exemplo funcional de TCC** (`ifes8-tcc-ex.tex`) e um **modelo de artigo para a Revista Ifes Ciência** (`revista-ifes-ciencia-ex.tex`) que servem ao mesmo tempo como manuais de uso e modelos para os estudantes e pesquisadores.
 
 ## 🚀 Comece Rapidamente
 
@@ -121,10 +124,16 @@ latexmk -pdf ifes8-tcc-ex.tex
 
 #### 3. Use no seu projeto
 
-Copie o arquivo `ifes8.cls` para o diretório do seu projeto e inicie o documento com:
+**Para TCC/Dissertação/Tese:** Copie `ifes8.cls` para o diretório do seu projeto e inicie com:
 
 ```latex
 \documentclass[times,english,brazilian,oneside,section=TITLE]{ifes8}
+```
+
+**Para artigos da Revista Ifes Ciência:** Copie `ifes8-revista.cls` para o diretório do seu projeto e inicie com:
+
+```latex
+\documentclass[english]{ifes8-revista}
 ```
 
 ## 🗂️ Estrutura do Repositório
@@ -132,29 +141,30 @@ Copie o arquivo `ifes8.cls` para o diretório do seu projeto e inicie o document
 ```
 ifes-tcc-norms/
 ├── media/
-│   └── logo-ifes.png            # Logo institucional do Ifes
+│   └── logo-ifes.png               # Logo institucional do Ifes
 ├── ifes8/
-│   ├── ifes8.cls                # 🔑 Classe LaTeX principal
-│   ├── ifes8.org                # Log de revisões (Org-Mode)
-│   ├── README.org               # Documentação original da classe
-│   ├── LICENSE                  # Licença LPPL v1.3c
+│   ├── ifes8.cls                    # 🔑 Classe LaTeX — trabalhos acadêmicos (TCC, dissertação, tese)
+│   ├── ifes8-revista.cls            # 📰 Classe LaTeX — artigos da Revista Ifes Ciência
+│   ├── ifes8.org                    # Log de revisões (Org-Mode)
+│   ├── LICENSE                      # Licença LPPL v1.3c
 │   ├── exemplo-tcc/
-│   │   ├── ifes8-tcc-ex.tex     # 📝 Exemplo/modelo de TCC
-│   │   ├── ifes8-tcc-ex.pdf     # PDF compilado do exemplo
-│   │   ├── ifes8.cls            # Symlink → ../ifes8.cls
-│   │   ├── configlistings.tex   # Configuração de listagens de código
-│   │   ├── referencias.bib      # Base de referências bibliográficas
-│   │   └── pics/                # Imagens do exemplo TCC
+│   │   ├── ifes8-tcc-ex.tex         # 📝 Exemplo/modelo de TCC
+│   │   ├── ifes8-tcc-ex.pdf         # PDF compilado do exemplo
+│   │   ├── ifes8.cls                # Symlink → ../ifes8.cls
+│   │   ├── configlistings.tex       # Configuração de listagens de código
+│   │   ├── referencias.bib          # Base de referências bibliográficas
+│   │   └── pics/                    # Imagens do exemplo TCC
 │   └── exemplo-revista-ifes-ciencia/
-│       ├── revista-ifes-ciencia-ex.tex # 📰 Modelo para a Revista Ifes Ciência
-│       ├── revista-ifes-ciencia-ex.pdf # PDF compilado do exemplo
-│       └── pics/                # Logotipos e imagens da revista
-├── SDD/                         # Documentação de desenvolvimento (Spec-Driven)
+│       ├── revista-ifes-ciencia-ex.tex  # 📰 Modelo para a Revista Ifes Ciência
+│       ├── revista-ifes-ciencia-ex.pdf  # PDF compilado do exemplo
+│       ├── ifes8-revista.cls            # Symlink → ../ifes8-revista.cls
+│       └── pics/                        # Logotipos e imagens da revista
+├── SDD/                             # Documentação de desenvolvimento (Spec-Driven)
 │   ├── constituition.md
 │   ├── contract.md
 │   ├── plan.md
 │   └── specs.md
-└── README.md                    # ← Você está aqui
+└── README.md                        # ← Você está aqui
 ```
 
 ## 🆕 Atualizações da Edição 2024
