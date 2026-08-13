@@ -18,6 +18,11 @@
 % \usepackage{microtype}          % Desativado: causa timeout no Overleaf com TeX Live 2025
 \usepackage{morefloats}         % permite mais floats
 \usepackage{blindtext}          % para gerar texto aleatório (dummy text)
+\makeatletter
+\let\blindtext@brazil\blindtext@english
+\let\blindtext@brazilian\blindtext@english
+\makeatother
+\DeclareFontShape{T1}{lmr}{b}{it}{<->ssub * lmr/b/sl}{}
 \usepackage{tikz}
 \usetikzlibrary[topaths]
 \usepackage{mathtools}
@@ -1018,11 +1023,11 @@ para que elas possam aparecer na seção de referências bibliográficas.
 
 \section{Análises}
 
-\blindtext[7]
+\blindtext[1]
 
 \section{Trabalhos Futuros}
 
-\blindtext[7]
+\blindtext[1]
 
 
 %%% ====================================================================
@@ -1044,7 +1049,7 @@ para que elas possam aparecer na seção de referências bibliográficas.
 % --------------------------------------------------------------------
 \chapter{Demonstração do Teorema Loren Ipsum}
 
-\blindtext[7]
+\blindtext[1]
 
 
 % --------------------------------------------------------------------
@@ -1052,31 +1057,31 @@ para que elas possam aparecer na seção de referências bibliográficas.
 
 \section{Princípio da Boa Ordenação}
 
-\blindtext[3]
+\blindtext[1]
 
 \section{Indução em Listas}
 
-\blindtext[2]
+\blindtext[1]
 
 \subsection{Estudo de Caso: Tamanho da Lista}
 
-\blindtext[2]
+\blindtext[1]
 
 \subsection{Estudo de Caso: Pesquisa em Lista}
 
-\blindtext[2]
+\blindtext[1]
 
 \section{Indução em Árvores}
 
-\blindtext[2]
+\blindtext[1]
 
 \subsection{Estudo de Caso: Cálculo de Profundidade}
 
-\blindtext[2]
+\blindtext[1]
 
 \subsection{Estudo de Caso: Pesquisa em Árvore}
 
-\blindtext[2]
+\blindtext[1]
 
 
 %%% Início dos anexos ------------------------------------------------
