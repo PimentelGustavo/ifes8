@@ -1,73 +1,25 @@
 %%% ============================================================
-%%% Exemplo de uso da classe LaTeX Ifes8 para Revista Ifes Ciência
-%%% de acordo com as normas estabelecidas no documento “Normas para
-%%% Apresentação de Trabalhos Acadêmicos e Científicos: Documento Impresso e/ou
-%%% Digital”, 9ª edição -- 2024.
+%%% Exemplo de uso da classe LaTeX Ifes8 (modo revista) para
+%%% a Revista Ifes Ciência, de acordo com as normas estabelecidas no
+%%% documento "Normas para Apresentação de Trabalhos Acadêmicos e
+%%% Científicos: Documento Impresso e/ou Digital", 9ª edição -- 2024.
 %%%
 %%% Autor da classe ifes8: Prof. Jefferson O. Andrade <jefferson.andrade@ifes.edu.br>
 %%% Exemplo criado por Gustavo Cardoso Pimentel
-%%% Data de criação: 2026-08-12
+%%% Data de criação: 2026-08-12 | Data de atualização: 2026-08-13
 %%%
 %%% ============================================================
 
-\documentclass[12pt,a4paper]{article}
+\documentclass[revista,english,oneside]{ifes8}
 
-% ---------------- Idioma e codificação ----------------
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[english]{babel}
-
-% ---------------- Fonte (Times New Roman) ----------------
-\usepackage{mathptmx}
-\usepackage[expansion=false]{microtype}
-
-% ---------------- Geometria da página ----------------
-% Margens do .docx: superior 3,0 cm; inferior 2,0 cm; esquerda 3,0 cm;
-% direita 2,0 cm; cabeçalho a 1,0 cm do topo; rodapé a 1,25 cm da base.
-\usepackage[a4paper,
-top=3cm,bottom=2cm,left=3cm,right=2cm,
-headheight=1.5cm,headsep=0.6cm,footskip=1.1cm]{geometry}
-
-\usepackage{xcolor}
-\usepackage{graphicx}
-\usepackage{fancyhdr}
-\usepackage{ragged2e}
-\usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
-\usepackage{array}
-\usepackage{caption}
-\usepackage{indentfirst}
-\usepackage{needspace}
-
-% ---------------- Cor institucional ----------------
-\definecolor{ifesteal}{HTML}{004240}
-
-% ---------------- Parágrafos (normas do template) ----------------
-% Times New Roman 12, espaçamento simples, justificado, recuo de
-% 1,25 cm na primeira linha, 6 pt de espaço depois de cada parágrafo.
-\setlength{\parindent}{1.25cm}
-\setlength{\parskip}{6pt}
-\linespread{1.0}
-
-% Coluna: o corpo principal (INTRODUÇÃO até REFERÊNCIAS) é
-% diagramado em 2 colunas.
-\setlength{\columnsep}{1.25cm}
-
-% Melhora a justificação em colunas estreitas (nomes próprios,
-% siglas e URLs longas do texto normativo original).
-\tolerance=2000 \emergencystretch=2.5em \hbadness=10000 \sloppy
-
-% ---------------- Cabeçalho corrido (a partir da pág. 2) ----------------
-\pagestyle{fancy}
-\fancyhf{}
-\setlength{\fboxsep}{4pt}
-\newcommand{\ifespagebox}{%
-  \colorbox{ifesteal}{\textcolor{white}{\textbf{\thepage}}}%
-}
-\fancyhead[L]{\ifespagebox\hspace{4pt}\textbf{v.9n.1 2023}}
-\fancyhead[R]{\raisebox{-0.15cm}{\includegraphics[height=1.05cm]{pics/logo_ifes_ciencia.png}}}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
+% ---------------- Dados do artigo ----------------
+\revistavolume{v.9n.1 2023}
+\revistapaginas{XX-YY}
+\revistadoi{YYYYYY}
+\artigotitulo{PAPER TITLE}
+\datasubmissao{XX/XX/XXXX}
+\dataaceitacao{XX/XX/XXXX}
+\datapublicacao{XX/XX/XXXX}
 
 \begin{document}
 
@@ -75,27 +27,9 @@ headheight=1.5cm,headsep=0.6cm,footskip=1.1cm]{geometry}
 %% PÁGINA 1 -- Capa do artigo (faixa ISSN/DOI, banner, resumo
 %% gráfico, título, autores, endereços e nota de submissão)
 %% ==================================================================
-\thispagestyle{empty}
+\imprimircaparevista
 
-\begin{flushright}
-\colorbox{ifesteal}{%
-  \begin{minipage}{9.6cm}
-\raggedleft \color{white}\bfseries \fontsize{13}{16}\selectfont ISSN 2359-4799\\[2pt]
-Volume 9 / Number 1 / Year 2023 -- p. XX-YY\\[2pt]
-    DOI:YYYYYY
-  \end{minipage}%
-}
-\end{flushright}
-
-\vspace{3mm}
-\noindent\includegraphics[width=\textwidth]{pics/banner_ifes_ciencia.png}
-
-\vspace{12mm}
-
-\begin{center} \textbf{GRAPHICAL ABSTRACT}
-
-\vspace{8mm}
-
+\begin{graphicalabstract}
 \textbf{<Insert here image of the Graphical Abstract}
 
 \textbf{(texts within the images must be in English)>}
@@ -109,16 +43,14 @@ Volume 9 / Number 1 / Year 2023 -- p. XX-YY\\[2pt]
 \textit{\textbf{Graphical Abstract: it is a figure that represents or illustrates a
 synthesis of the entire work. It can be done in PowerPoint or any other program the
 author desires.}}
+\end{graphicalabstract}
 
-\vspace{12mm}
+\imprimirtituloartigo
 
-{\Large\bfseries PAPER TITLE} \end{center}
-
-\vspace{6mm}
 \noindent Author 1 (insert only after
-acceptance)\textsuperscript{1}\,\includegraphics[height=2.3mm]{pics/orcid_icon.png}*,
+acceptance)\textsuperscript{1}\orcid*,
 Author 2 (insert only after
-acceptance),\textsuperscript{2}\,\includegraphics[height=2.3mm]{pics/orcid_icon.png} and
+acceptance),\textsuperscript{2}\orcid{} and
 Author 3 (insert only after acceptance),\textsuperscript{1}
 
 \noindent \textsuperscript{1}Address. Remember that the smallest unit used must be the
@@ -132,8 +64,7 @@ campus of the institution, separate the authors by address.
 
 \begin{flushright} * (insert the e-mail of the corresponding author) \end{flushright}
 
-\begin{center} Article submitted in XX/XX/XXXX, accepted in XX/XX/XXXX and published in
-XX/XX/XXXX. \end{center}
+\imprimirdatasartigo
 
 \vfill
 
@@ -550,4 +481,3 @@ platform, and the author(s) will be notified and removed from the list of contri
 for the journal.
 
 \end{document}
-
