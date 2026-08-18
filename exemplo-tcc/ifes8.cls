@@ -12,12 +12,12 @@
 %%% https://github.com/quigonjeff/ifes8
 %%% 
 %%% Autor: Prof. Jefferson O. Andrade <jefferson.andrade@ifes.edu.br>
-%%% Atualizado por: Gustavo Cardoso Pimentel em 11 de agosto de 2026 (Adequação às normas Ifes 2024 - 9ª edição)
-%%% Data de criação: 2018-02-22 | Data de atualização: 2026-08-11
+%%% Atualizado por: Gustavo Cardoso Pimentel em 18 de agosto de 2026 (Adequação às normas Ifes 2024 - 9ª edição)
+%%% Data de criação: 2018-02-22 | Data de atualização: 2026-08-18
 %%% 
 
 \NeedsTeXFormat{LaTeX2e} 
-\ProvidesClass{ifes8}[2026/08/13 v9.1 Classe de trabalhos academicos do Ifes (Normas 2024)]
+\ProvidesClass{ifes8}[2026/08/18 v9.0.1 Classe de trabalhos academicos do Ifes (Normas 2024)]
 
 \RequirePackage{ifthen}
 
