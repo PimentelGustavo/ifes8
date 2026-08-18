@@ -67,6 +67,10 @@
   \fancyhf{}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
+  %% Margens simétricas no modo revista
+  \setlrmarginsandblock{2cm}{2cm}{*}
+  \setulmarginsandblock{2cm}{2cm}{*}
+  \checkandfixthelayout
   %% Parágrafos: recuo 1,25 cm, 6 pt após, espaçamento simples
   \setlength{\parindent}{1.25cm}
   \setlength{\parskip}{6pt}
