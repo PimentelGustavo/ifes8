@@ -47,8 +47,7 @@
 
 \RequirePackage[fleqn]{amsmath}
 
-\RequirePackage{subcaption}
-
+\RequirePackage{caption}
 
 %%% Configuração das margens do documento.
 \setlrmarginsandblock{3cm}{2cm}{*}
@@ -88,6 +87,8 @@
   \setlength{\parindent}{0mm}
   %%% Espaçamento entre parágrafos
   \setlength{\parskip}{15pt}
+  %%% Espaçamento 1,5 entre linhas (Norma 2024)
+  \OnehalfSpacing
 }
 
 
@@ -111,7 +112,11 @@
     \RequirePackage{lmodern}
   }{%
     \RequirePackage{helvet}
-    \RequirePackage[helvet]{sfmath}
+    \IfFileExists{sfmath.sty}{%
+      \RequirePackage[helvet]{sfmath}%
+    }{%
+      % Fallback seguro caso sfmath não esteja instalado no Linux
+    }
     \renewcommand{\familydefault}{\sfdefault}
   }
 }
@@ -119,8 +124,8 @@
 
 %%% Reconfiguração dos tamanhos das fontes de legendas para “fonte
 %%% reduzida”.
-\captionnamefont{\ABNTEXfontereduzida}
-\captiontitlefont{\ABNTEXfontereduzida}
+\captionnamefont{\normalsize}
+\captiontitlefont{\normalsize}
 
 
 %%% Formatação dos títulos: partes, capítulos, seções, subseções e
@@ -323,10 +328,11 @@
     %
     \hspace{0.45\textwidth}
     \begin{minipage}{0.5\textwidth}
-      {\ABNTEXsectionfontsize\imprimirorientadorRotulo~\imprimirorientador}
+      \SingleSpacing
+      {\footnotesize\imprimirorientadorRotulo~\imprimirorientador}
       \abntex@ifnotempty{\imprimircoorientador}{%
         \par
-        {\ABNTEXsectionfontsize\imprimircoorientadorRotulo~\imprimircoorientador}%
+        {\footnotesize\imprimircoorientadorRotulo~\imprimircoorientador}%
       }
     \end{minipage}
     \\%
@@ -360,11 +366,11 @@
 \makeatother
 
 \renewcommand{\fonte}[2][\fontename]{%
-  \par\RaggedRight{\footnotesize{#1: #2}}
+  \par\centering{\footnotesize{#1: #2}}\par
 }
 
-\renewcommand{\nota}[2][\notaname]{
-  \par\RaggedRight{\footnotesize{#1: #2}}
+\renewcommand{\nota}[2][\notaname]{%
+  \par\centering{\footnotesize{#1: #2}}\par
 }
 
 
@@ -374,13 +380,14 @@
 %%% documento, i.e., após o \begin{document}.
 %%%   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \AtBeginDocument{%
-  \setlength{\abovecaptionskip}{5pt} % espaçamento antes da legenda de
+  \setlength{\abovecaptionskip}{6pt} % espaçamento antes da legenda de
                                 % tabelas/figuras 
+  \setlength{\belowcaptionskip}{6pt}
   \setsecnumformat{\csname the#1\endcsname\space}  % Formata o número das seções
                                 % de acordo com a norma
   \renewcommand{\afterchapternum}{\hspace{-4pt}}  % Ajusta o espaçamento após o
                                 % título dos capítulos
-  \captionsetup{justification=justified,singlelinecheck=false} % ajusta a
+  \captionsetup{justification=centering,singlelinecheck=false} % ajusta a
                                 % formatação da legendas das figuras à norma
 }
 

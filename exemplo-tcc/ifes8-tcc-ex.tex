@@ -15,6 +15,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lastpage}           % Usado pelo exemplo de ficha catalográfica
 \usepackage[alf,abnt-full-initials=yes]{abntex2cite} % Esta opção é exigida pelas normas do ifes.
+
+% Ajuste ABNT NBR 10520:2023 (Citações autor-data em caixa mista)
+\makeatletter
+\renewcommand{\citeauthor}{\citeauthoronline}
+\makeatother
+
 \usepackage{microtype}          % para melhorias de justificação
 \usepackage{morefloats}         % permite mais floats
 \usepackage{blindtext}          % para gerar texto aleatório (dummy text)
@@ -24,6 +30,8 @@
 \usepackage{xcolor}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{textcomp}
+\usepackage{eurosym}
 \usepackage{listings}
 \input{configlistings}
 
@@ -37,9 +45,9 @@
 %%% \end{otherlanguage}
 \selectlanguage{brazilian}
 
-%%% Ajuste do alinhament do caption de figuras, tabelas e quadros.
-\captionstyle{\raggedright}
-\normalcaption
+%%% Ajuste do alinhamento do caption de figuras, tabelas e quadros.
+% \captionstyle{\raggedright}
+% \normalcaption
 % \normalcaptionwidth
 % \captionwidth{\linewidth}
 
@@ -515,7 +523,6 @@ são:
 \item Ficha catalográfica (obrigatório)
 \item Errata (opcional)
 \item Folha de aprovação (obrigatório)
-\item Declaração do autor (obrigatório)
 \item Dedicatória (opcional)
 \item Agradecimentos (opcional)
 \item Epígrafe (opcional)
