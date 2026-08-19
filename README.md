@@ -1,11 +1,11 @@
 <div align="center">
     <img src="logo-ifes.svg" alt="Logo Ifes" width="180" height="180"/>
-    <h1>📐 Classe LaTeX Ifes — v9.0.1 (Normas 2024)</h1>
+    <h1>📐 Classe LaTeX Ifes — v9.0.2 (Normas 2024)</h1>
     <h3><em>Formate seu trabalho acadêmico em conformidade com as normas do Ifes.</em></h3>
 </div>
 
 <p align="center">
-    <a href="#"><img src="https://img.shields.io/badge/versão-v9.0.1-blue" alt="Versão v9.0.1"/></a>
+    <a href="#"><img src="https://img.shields.io/badge/versão-v9.0.2-blue" alt="Versão v9.0.2"/></a>
     <a href="#"><img src="https://img.shields.io/badge/edição-9ª_(2024)-2E8B57" alt="Edição da Norma"/></a>
     <a href="#"><img src="https://img.shields.io/badge/classe-ifes8.cls-2E8B57" alt="Classe"/></a>
     <a href="#"><img src="https://img.shields.io/badge/motor-pdfLaTeX-336791" alt="Motor TeX"/></a>
@@ -24,7 +24,7 @@
     - [🐧 Guia de Instalação no Linux](#-guia-de-instalação-no-linux-ubuntu--pop_os--debian)
     - [🪟 Guia de Instalação no Windows 11](#-guia-de-instalação-no-windows-11)
 - [🗂️ Estrutura do Repositório](#️-estrutura-do-repositório)
-- [🆕 Atualizações da Edição 2024 (v9.0.1)](#-atualizações-da-edição-2024-v901)
+- [🆕 Atualizações da Edição 2024 (v9.0.2)](#-atualizações-da-edição-2024-v901)
 - [🎓 Tipos de Trabalho Suportados](#-tipos-de-trabalho-suportados)
 - [🛠️ Dependências](#️-dependências)
 - [📚 Referências Normativas](#-referências-normativas)
@@ -51,7 +51,7 @@ A classe estende a `abntex2` (que por sua vez estende a `memoir`) e permite a cr
 <summary><strong>📋 Passo a passo no Overleaf (clique para expandir)</strong></summary>
 
 #### 1. Baixe o projeto
-Clique em **`<> Code`** → **`Download ZIP`** neste repositório ou baixe o arquivo zip da versão `v9.0.1`.
+Clique em **`<> Code`** → **`Download ZIP`** neste repositório ou baixe o arquivo zip da versão `v9.0.2`.
 
 #### 2. Crie um novo projeto no Overleaf
 1. Acesse [overleaf.com](https://www.overleaf.com) e faça login.
@@ -147,21 +147,21 @@ ifes-tcc-norms/
 ├── media/
 │   └── logo-ifes.png            # Logo institucional do Ifes
 ├── ifes8/
-│   ├── ifes8.cls                # 🔑 Classe LaTeX principal (v9.0.1)
+│   ├── ifes8.cls                # 🔑 Classe LaTeX principal (v9.0.2)
 │   ├── ifes8.org                # Log de revisões (Org-Mode)
 │   ├── README.org               # Documentação original da classe
 │   ├── LICENSE                  # Licença LPPL v1.3c
 │   ├── exemplo-tcc/
 │   │   ├── ifes8-tcc-ex.tex     # 📝 Exemplo/modelo de TCC
 │   │   ├── ifes8-tcc-ex.pdf     # PDF compilado do exemplo TCC
-│   │   ├── ifes8.cls            # Arquivo físico da classe (v9.0.1)
+│   │   ├── ifes8.cls            # Arquivo físico da classe (v9.0.2)
 │   │   ├── configlistings.tex   # Configuração de listagens de código
 │   │   ├── referencias.bib      # Base de referências bibliográficas
 │   │   └── pics/                # Imagens do exemplo TCC
 │   └── exemplo-revista-ifes-ciencia/
 │       ├── revista-ifes-ciencia-ex.tex # 📰 Modelo para a Revista Ifes Ciência
 │       ├── revista-ifes-ciencia-ex.pdf # PDF compilado do exemplo Revista
-│       ├── ifes8.cls            # Arquivo físico da classe (v9.0.1)
+│       ├── ifes8.cls            # Arquivo físico da classe (v9.0.2)
 │       └── pics/                # Logotipos e imagens da revista
 ├── SDD/                         # Documentação de desenvolvimento (Spec-Driven)
 └── README.md                    # ← Você está aqui
@@ -169,11 +169,11 @@ ifes-tcc-norms/
 
 ---
 
-## 🆕 Atualizações da Edição 2024 (v9.0.1)
+## 🆕 Atualizações da Edição 2024 (v9.0.2)
 
-| Aspecto | Norma 2017 (8ª ed.) | Norma 2024 (9ª ed. / v9.0.1) |
+| Aspecto | Norma 2017 (8ª ed.) | Norma 2024 (9ª ed. / v9.0.2) |
 |---|---|---|
-| **Versão da Classe** | v8.x | **v9.0.1** ✅ |
+| **Versão da Classe** | v8.x | **v9.0.2** ✅ |
 | **Arquivos de Classe** | Links simbólicos | Arquivos físicos reais (`ifes8.cls`) em todas as pastas ✅ |
 | **Modo Revista** | Deslocamento de margem | Margens simétricas e alinhamento uniforme em todas as páginas (`oneside`) ✅ |
 | **Espaçamento entre parágrafos** | `\parskip = 12pt` | `\parskip = 15pt` ✅ |
