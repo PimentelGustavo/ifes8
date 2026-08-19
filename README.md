@@ -35,7 +35,7 @@
 
 ## 📖 O que é este projeto? 
 
-Este repositório contém a **versão 9.0.1** da classe `ifes8`, desenvolvida originalmente pelo Prof. Jefferson O. Andrade e atualizada para conformidade total com a **9ª edição (2024)** das *"Normas para Apresentação de Trabalhos Acadêmicos e Científicos"* do Instituto Federal do Espírito Santo (Ifes).
+Este repositório contém a **versão 9.0.2** da classe `ifes8`, desenvolvida originalmente pelo Prof. Jefferson O. Andrade e atualizada para conformidade total com a **9ª edição (2024)** das *"Normas para Apresentação de Trabalhos Acadêmicos e Científicos"* do Instituto Federal do Espírito Santo (Ifes).
 
 A classe estende a `abntex2` (que por sua vez estende a `memoir`) e permite a criação de trabalhos acadêmicos completos — com todos os elementos pré-textuais, textuais e pós-textuais —, além de artigos científicos para a **Revista Ifes Ciência**.
 
@@ -224,7 +224,7 @@ A classe e os exemplos deste repositório suportam nativamente a formatação pa
 | | Nome | Contribuição |
 |---|---|---|
 | 🧑‍🏫 | **Prof. Dr. Jefferson O. Andrade** | Autor original da classe `ifes8` |
-| 🎓 | **Gustavo Cardoso Pimentel** | Atualização para a versão 9.0.1 (Normas 2024 — 9ª edição) |
+| 🎓 | **Gustavo Cardoso Pimentel** | Atualização para a versão 9.0.2 (Normas 2024 — 9ª edição) |
 
 ---
 
