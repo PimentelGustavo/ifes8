@@ -13,11 +13,16 @@
 %%% 
 %%% Autor: Prof. Jefferson O. Andrade <jefferson.andrade@ifes.edu.br>
 %%% Atualizado por: Gustavo Cardoso Pimentel em 18 de agosto de 2026 (Adequação às normas Ifes 2024 - 9ª edição)
+%%% Revisado em 18 de agosto de 2026: correção de margens do modo revista,
+%%%   tamanho de fonte do resumo, separação dos campos de volume/número/ano,
+%%%   cabeçalho corrente (altura/alinhamento da logo e da caixa de página) e
+%%%   página própria e robusta para o Abstract/Keywords (ver comentários
+%%%   "REVISÃO 2026-08-18" ao longo do arquivo).
 %%% Data de criação: 2018-02-22 | Data de atualização: 2026-08-18
 %%% 
 
 \NeedsTeXFormat{LaTeX2e} 
-\ProvidesClass{ifes8}[2026/08/18 v9.0.1 Classe de trabalhos academicos do Ifes (Normas 2024)]
+\ProvidesClass{ifes8}[2026/08/18 v9.0.2 Classe de trabalhos academicos do Ifes (Normas 2024)]
 
 \RequirePackage{ifthen}
 
@@ -40,13 +45,9 @@
 \LoadClass[12pt,a4paper,chapter=TITLE,section=TITLE]{abntex2}
 
 \RequirePackage{hyperref}
-
 \RequirePackage{enumitem}
-
 \RequirePackage{ragged2e}
-
 \RequirePackage[fleqn]{amsmath}
-
 \RequirePackage{caption}
 
 %%% Configuração das margens do documento.
@@ -54,29 +55,57 @@
 \setulmarginsandblock{3cm}{2cm}{*}
 \checkandfixthelayout
 
-
 \ifthenelse{\boolean{IFESrevista}}{%
   %%% ================================================================
-  %%% Modo REVISTA: cabeçalhos via fancyhdr, parágrafos com recuo,
-  %%% espaçamento simples, tolerância alta para colunas estreitas.
+  %%% Modo REVISTA: Cabeçalhos, Colunas e Blindagem de Margens
   %%% ================================================================
   \RequirePackage{fancyhdr}
   \RequirePackage{indentfirst}
   \RequirePackage{needspace}
+  
+  %% 1. DECLARAÇÃO MATEMÁTICA DAS MARGENS E CABEÇALHOS
+  %% \lowermargin = 2cm = espaço reservado na parte inferior da folha.
+  %% \footskip  = 2cm = distância da última baseline do corpo de texto
+  %%                     até a baseline do rodapé.  Isso garante que a
+  %%                     última linha do texto SEMPRE pare a 2cm da borda
+  %%                     inferior, independentemente de o rodapé conter
+  %%                     texto ou estar vazio.
+  %% footer height = 0pt = o rodapé não consome espaço vertical;
+  %%                        quando preenchido, é desenhado SOBRE a margem.
+  \setlrmarginsandblock{3cm}{2cm}{*}
+  \setulmarginsandblock{3cm}{2cm}{*}
+  \setheadfoot{1.6cm}{0pt}
+  \setheaderspaces{*}{0.1cm}{*}
+  \setlength{\footskip}{2cm}
+  
+  %% 2. APLICAÇÃO DA TRAVA [fixed]
+  %% Proíbe o LaTeX de arredondar a altura do texto para caber linhas
+  %% completas, garantindo que o texto pare a exatos 2cm do fim da folha.
+  \checkandfixthelayout[fixed]
+  
+  %% 3. SABOTAGEM DO GATILHO OCULTO DO ABNTEX2 (A MÁGICA)
+  %% O abntex2 roda um \checkandfixthelayout no \AtBeginDocument que desfaz 
+  %% a trava acima. Ao redefinirmos o comando para vazio aqui, tornamos 
+  %% a nossa geometria blindada e inalterável pelo resto da compilação.
+  \renewcommand{\checkandfixthelayout}[1][]{}
+  
   \pagestyle{fancy}
   \fancyhf{}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
-  %% Margens simétricas no modo revista
-  \setlrmarginsandblock{2cm}{2cm}{*}
-  \setulmarginsandblock{2cm}{2cm}{*}
-  \checkandfixthelayout
+  \let\ps@plain\ps@fancy
+  
   %% Parágrafos: recuo 1,25 cm, 6 pt após, espaçamento simples
   \setlength{\parindent}{1.25cm}
   \setlength{\parskip}{6pt}
   \linespread{1.0}
-  %% Espaçamento entre colunas
-  \setlength{\columnsep}{1.25cm}
+  
+  %% Citação direta longa no modo revista
+  \setlength{\ABNTEXcitacaorecuo}{2cm}
+  
+  %% Espaçamento entre colunas: 720 twips = 1,27 cm (exato ao template docx)
+  \setlength{\columnsep}{1.27cm}
+  
   %% Tolerância para justificação em colunas estreitas
   \tolerance=2000 \emergencystretch=2.5em \hbadness=10000 \sloppy
 }{%
@@ -146,11 +175,9 @@
 \renewcommand{\ABNTEXsubsubsubsectionfontsize}{\normalsize}
 
 
-
 \addtolength{\cftlastnumwidth}{-1em}
 
 \ifthenelse{\boolean{ABNTEXsumario-abnt-6027-2012}}{%
-  
   \cftsetindents{part}{0em}{\cftlastnumwidth}
   \cftsetindents{chapter}{0em}{\cftlastnumwidth}
   \cftsetindents{section}{0em}{\cftlastnumwidth}
@@ -158,49 +185,32 @@
   \cftsetindents{subsubsection}{0em}{\cftlastnumwidth}
   \cftsetindents{paragraph}{0em}{\cftlastnumwidth}
   \cftsetindents{subparagraph}{0em}{\cftlastnumwidth}
-  % 
   \renewcommand{\tocprintchapter}{%
     \addtocontents{toc}{\cftsetindents{chapter}{0em}{\cftlastnumwidth}}}
-  % 
   \renewcommand{\tocinnonumchapter}{%
     \addtocontents{toc}{\cftsetindents{chapter}{\cftlastnumwidth}{2em}}%
     \cftinserthook{toc}{A}}
-  % 
   \renewcommand{\tocprintchapternonum}{%
     \addtocontents{toc}{\cftsetindents{chapter}{\cftlastnumwidth}{2em}}}
-  % 
   \renewcommand{\tocpartapendices}{%
     \addtocontents{toc}{\cftsetindents{part}{\cftlastnumwidth}{2em}}
     \cftinserthook{toc}{A}}
-  % 
   \renewcommand{\tocpartanexos}{%
     \addtocontents{toc}{\cftsetindents{part}{\cftlastnumwidth}{2em}}
     \cftinserthook{toc}{A}}
-  % 
-
-  % 
-  % Fontes das entradas do sumario
-  % 
   \renewcommand{\cftpartfont}{\bfseries\normalsize}
-  % 
   \renewcommand{\cftchapterfont}{\bfseries\normalsize}
   \renewcommand{\cftchapterpagefont}{\cftchapterfont}
-  % 
   \renewcommand{\cftsectionfont}{\mdseries\normalsize}
   \renewcommand{\cftsectionpagefont}{\cftsectionfont}
-  % 
   \renewcommand{\cftsubsectionfont}{\bfseries\normalsize}
   \renewcommand{\cftsubsectionpagefont}{\mdseries\cftsubsectionfont}
-  % 
   \renewcommand{\cftsubsubsectionfont}{\mdseries\normalsize}
   \renewcommand{\cftsubsubsectionpagefont}{\cftsubsubsectionfont}
-  % 
   \renewcommand{\cftparagraphfont}{\itshape\mdseries\normalsize}
   \renewcommand{\cftparagraphpagefont}{\cftparagraphfont}
-  % 
   \setlength{\cftbeforechapterskip}{0em}
 }{}
-
 
 %%% Nomes constantes
 \newcommand{\declaracaodoautorname}{Declara\c{c}\~{a}o do Autor}
@@ -230,7 +240,6 @@
 }
 % ---
 
-
 %%% ---
 %%% List of symbol
 \newenvironment{isymbols}{%
@@ -251,7 +260,6 @@
 \newcommand{\simb}[1]{\item[#1]\mbox{}}
 %%% ---
 
-
 % ---
 % Lista de simbolos
 \renewenvironment{simbolos}{%
@@ -263,7 +271,6 @@
 }
 % ---
 
-
 %%% ---
 \newcommand{\quadroname}{Quadro}
 \newfloat{quadro}{loq}{\quadroname}
@@ -273,8 +280,6 @@
 \renewcommand{\cftquadroname}{\quadroname\space} 
 \renewcommand{\cftquadroaftersnum}{\hfill\textendash\hfill}
 %%% ---
-
-
 
 %%% Redefinição do comando de impressão da capa
 \renewcommand{\imprimircapa}{%
@@ -298,19 +303,14 @@
     %
     \ABNTEXsectionfontsize\imprimirlocal\\
     \ABNTEXsectionfontsize\imprimirdata\\
-
-    %\vspace*{1cm}
   \end{capa}
 }
 
 %%% Redefinição do comando de impressão da folha de rosto.
-%%% Para esta parte do código é necessário que o caracter arroba `@'
-%%% seja tratado como uma letra pelo LaTeX.
 \makeatletter
 \renewcommand{\folhaderostocontent}{
   \begin{center}
-    {%\ABNTEXchapterfont
-    \ABNTEXchapterfontsize\MakeTextUppercase{\imprimirautor}}\\
+    {\ABNTEXchapterfontsize\MakeTextUppercase{\imprimirautor}}\\
     %
     \vspace{4.5cm}
     %
@@ -349,7 +349,6 @@
 }
 \makeatother
 
-
 %%% ---
 %%% Declaração do Autor
 \newenvironment{declaracaodoautor}[1][\declaracaodoautorname]{%
@@ -377,29 +376,23 @@
   \par\centering{\footnotesize{#1: #2}}\par
 }
 
-
-
 %%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %%% Comandos LaTeX que devem ser executados após o início do corpo do
 %%% documento, i.e., após o \begin{document}.
 %%%   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \AtBeginDocument{%
-  \setlength{\abovecaptionskip}{6pt} % espaçamento antes da legenda de
-                                % tabelas/figuras 
+  \setlength{\abovecaptionskip}{6pt} % espaçamento antes da legenda
   \setlength{\belowcaptionskip}{6pt}
   \setsecnumformat{\csname the#1\endcsname\space}  % Formata o número das seções
-                                % de acordo com a norma
-  \renewcommand{\afterchapternum}{\hspace{-4pt}}  % Ajusta o espaçamento após o
-                                % título dos capítulos
-  \captionsetup{justification=centering,singlelinecheck=false} % ajusta a
-                                % formatação da legendas das figuras à norma
+  \renewcommand{\afterchapternum}{\hspace{-4pt}}  % Ajusta espaçamento
+  \captionsetup{justification=centering,singlelinecheck=false}
 }
 
 %%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %%% Definição de comando específicos da classe do Ifes.
 %%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-%%% Converte o título das seções para maiúsculas no Sumário (TOC) usando o preprocessador da classe memoir
+%%% Converte o título das seções para maiúsculas no Sumário
 \makeatletter
 \ifthenelse{\boolean{ABNTEXsumario-abnt-6027-2012}}{%
   \settocpreprocessor{section}{%
@@ -418,141 +411,193 @@
   \tableofcontents*%
 }
 
-%%% O título da seção primária “Referências” tem que ser alterado para ficar
-%%% todo em maiúsculas (porque sim, aparentemente...)
 \providecommand{\bibname}{}
 \renewcommand{\bibname}{REFERÊNCIAS}
 
-%%% O título da divisão de parte de  “Apêndices” tem que ser alterado para ficar
-%%% todo em maiúsculas (também porque sim...)
 \providecommand{\apendicesname}{}
 \renewcommand{\apendicesname}{APÊNDICES}
 
-%%% Define o comando \ifestex
 \providecommand{\ifestex}{}
 \renewcommand{\ifestex}{Ifes\TeX}
 
-%%% Define o valor padrão para o rótulo de orientadora
 \providecommand{\orientadoraname}{}
 \renewcommand{\orientadoraname}{Orientadora:}
-
-%%% Define o comando \orientadora
 \providecommand{\orientadora}{}
 \renewcommand{\orientadora}[2][\orientadoraname]{\orientador[#1]{#2}}
 
-%%% Define o valor padrão para o rótulo de orientadora
 \providecommand{\coorientadoraname}{}
 \renewcommand{\coorientadoraname}{Coorientadora:}
-
-%%% Define o comando \orientadora
 \providecommand{\coorientadora}{}
 \renewcommand{\coorientadora}[2][\coorientadoraname]{\coorientador[#1]{#2}}
-
 
 %%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %%% Comandos específicos do modo REVISTA (Revista Ifes Ciência)
 %%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 \makeatletter
 \ifIFESrevista
-  %
-  %%% Pacotes necessários para o modo revista
   \RequirePackage{xcolor}
   \RequirePackage{graphicx}
-  %
+  
   %%% Cor institucional
   \definecolor{ifesteal}{HTML}{004240}
-  %
+  
   %%% Comandos de metadados do artigo
   \newcommand{\@revistaissn}{2359-4799}
   \newcommand{\revistaissn}[1]{\renewcommand{\@revistaissn}{#1}}
-  %
+  
   \newcommand{\@revistavolume}{}
   \newcommand{\revistavolume}[1]{\renewcommand{\@revistavolume}{#1}}
-  %
+  
+  \newcommand{\@revistanumero}{}
+  \newcommand{\revistanumero}[1]{\renewcommand{\@revistanumero}{#1}}
+  
+  \newcommand{\@revistaano}{}
+  \newcommand{\revistaano}[1]{\renewcommand{\@revistaano}{#1}}
+  
+  \newcommand{\imprimirvolumecurta}{%
+    v.\@revistavolume\space n.\@revistanumero\space\@revistaano%
+  }
+  
+  \newcommand{\imprimirvolumelonga}{%
+    Volume \@revistavolume\ / Number \@revistanumero\ / Year \@revistaano%
+  }
+  
   \newcommand{\@revistadoi}{}
   \newcommand{\revistadoi}[1]{\renewcommand{\@revistadoi}{#1}}
-  %
+  
   \newcommand{\@revistapaginas}{XX-YY}
   \newcommand{\revistapaginas}[1]{\renewcommand{\@revistapaginas}{#1}}
-  %
+  
   \newcommand{\@revistabanner}{pics/banner_ifes_ciencia.png}
   \newcommand{\revistabanner}[1]{\renewcommand{\@revistabanner}{#1}}
-  %
+  
   \newcommand{\@revistalogo}{pics/logo_ifes_ciencia.png}
   \newcommand{\revistalogo}[1]{\renewcommand{\@revistalogo}{#1}}
-  %
+  
+  \newcommand{\@revistapaginacao}{pics/paginacao.png}
+  \newcommand{\revistapaginacao}[1]{\renewcommand{\@revistapaginacao}{#1}}
+  
   \newcommand{\@orcidicon}{pics/orcid_icon.png}
   \newcommand{\orcidicon}[1]{\renewcommand{\@orcidicon}{#1}}
-  %
+  
   \newcommand{\@artigotitulo}{}
   \newcommand{\artigotitulo}[1]{\renewcommand{\@artigotitulo}{#1}}
-  %
+  
   \newcommand{\@datasubmissao}{XX/XX/XXXX}
   \newcommand{\datasubmissao}[1]{\renewcommand{\@datasubmissao}{#1}}
-  %
+  
   \newcommand{\@dataaceitacao}{XX/XX/XXXX}
   \newcommand{\dataaceitacao}[1]{\renewcommand{\@dataaceitacao}{#1}}
-  %
+  
   \newcommand{\@datapublicacao}{XX/XX/XXXX}
   \newcommand{\datapublicacao}[1]{\renewcommand{\@datapublicacao}{#1}}
-  %
-  %%% Caixa colorida com número da página no cabeçalho
-  \newcommand{\ifespagebox}{%
-    \colorbox{ifesteal}{\textcolor{white}{\textbf{\thepage}}}%
+
+  %%% =========================================================
+  %%% CABEÇALHO CORRENTE E GEOMETRIA (Páginas 2 em diante)
+  %%% =========================================================
+  
+  \AtBeginDocument{%
+    \pagestyle{fancy}
+    \let\ps@plain\ps@fancy
+    
+    %% BLINDAGEM DA GEOMETRIA DA PÁGINA
+    %% Recalcula o layout após ativar o cabeçalho novo, mantendo
+    %% a margem fixa de 2cm na parte inferior da folha.
+    \setlrmarginsandblock{3cm}{2cm}{*}
+    \setulmarginsandblock{3cm}{2cm}{*}
+    \setheadfoot{1.6cm}{0pt}
+    \setheaderspaces{*}{0.1cm}{*}
+    \setlength{\footskip}{2cm}
+    \checkandfixthelayout[fixed]
   }
-  \fancyhead[L]{\ifespagebox\hspace{4pt}\textbf{\@revistavolume}}
-  \fancyhead[R]{\raisebox{-0.15cm}{\includegraphics[height=1.05cm]{\@revistalogo}}}
-  %
-  %%% Ícone ORCID
+
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+
+  \fancyhead[L]{%
+    % O raisebox permite ajustes finos sem invadir o texto
+    \raisebox{1.2cm}[0pt][0pt]{%
+      \makebox[0pt][r]{%
+        \rlap{\includegraphics[width=3cm,height=0.74cm]{\@revistapaginacao}}%
+        \makebox[3cm][r]{\raisebox{0.22cm}{\textcolor{white}{\fontsize{13}{16}\selectfont\thepage}}\hspace*{0.3cm}}%
+      }%
+      \hspace*{0.2cm}%
+      \raisebox{0.22cm}{\imprimirvolumecurta}%
+    }%
+  }
+  
+  \fancyhead[R]{%
+    \raisebox{0.9cm}[0pt][0pt]{\includegraphics[height=1.3cm]{\@revistalogo}}%
+  }
+
   \newcommand{\orcid}{\,\includegraphics[height=2.3mm]{\@orcidicon}}
-  %
-  %%% Comando para imprimir a capa do artigo (página 1)
+  
+  %%% =========================================================
+  %%% IMPRESSÃO DA CAPA (Página 1)
+  %%% =========================================================
   \newcommand{\imprimircaparevista}{%
     \thispagestyle{empty}%
-    \begin{flushright}
+    
+    % Sobe o bloco de forma agressiva para o limite superior da página 
+    \vspace*{-3.3cm}% 
+    
+    %% 1. FAIXA DE INFORMAÇÕES (ISSN/VOLUME/DOI)
+    \noindent\makebox[\textwidth][l]{%
+      \hspace{8cm}% Empurra a caixa para iniciar 11cm a partir da borda física
       \colorbox{ifesteal}{%
-        \begin{minipage}{9.6cm}
-          \raggedleft\color{white}\bfseries\fontsize{13}{16}\selectfont
-          ISSN \@revistaissn\\[2pt]
-          \@revistavolume\ -- p. \@revistapaginas\\[2pt]
+        \begin{minipage}{\dimexpr\paperwidth-11cm-2\fboxsep\relax}
+          \raggedright\color{white}\fontsize{13}{16}\selectfont
+          ISSN \@revistaissn\\[1pt]
+          \imprimirvolumelonga\ -- p. \@revistapaginas\\[1pt]
           DOI:\@revistadoi
         \end{minipage}%
-      }
-    \end{flushright}
-    \vspace{3mm}
-    \noindent\includegraphics[width=\textwidth]{\@revistabanner}
-    \vspace{12mm}
+      }%
+    }\par
+    
+    %% Espaçamento exato de 0.25 cm
+    \vspace*{2.5mm}%
+    
+    %% 2. BANNER DO IFES CIÊNCIA
+    \noindent\makebox[\textwidth][l]{%
+      \hspace{0.07cm}% Desloca a imagem para começar em 3,07cm da borda física
+      \includegraphics[width=\dimexpr\paperwidth-3.07cm\relax]{\@revistabanner}%
+    }\par
   }
-  %
+  
   %%% Ambiente para o resumo gráfico (Graphical Abstract)
   \newenvironment{graphicalabstract}{%
-    \begin{center}
-      \textbf{GRAPHICAL ABSTRACT}
-      \vspace{8mm}
+    \par\vspace{2.5mm}% Respiro exato após o banner
+    {\centering\textbf{GRAPHICAL ABSTRACT}\par}%
+    \vspace{6mm}%
+    \centering % Centraliza o conteúdo interno sem espaços extras de listas
   }{%
-    \end{center}
-    \vspace{8mm}
+    \par\vspace{6mm}% Respiro antes do título do artigo
   }
-  %
+  
   %%% Comando para imprimir o título do artigo
   \newcommand{\imprimirtituloartigo}{%
-    \begin{center}
-      {\Large\bfseries\@artigotitulo}
-    \end{center}
-    \vspace{6mm}
+    {\centering\fontsize{14}{16}\selectfont\bfseries\@artigotitulo\par}%
+    \vspace{4mm}% Respiro antes do nome dos autores
   }
-  %
-  %%% Comando para imprimir as datas de submissão/aceitação/publicação
+  
   \newcommand{\imprimirdatasartigo}{%
     \begin{center}
+      \fontsize{10}{12}\selectfont
       Article submitted in \@datasubmissao, accepted in \@dataaceitacao{}
       and published in \@datapublicacao.
     \end{center}
   }
-  %
+  
+  \newenvironment{resumoabstract}{%
+    \clearpage
+    \fontsize{11}{13}\selectfont
+  }{%
+    \normalsize
+    \clearpage
+  }
 \fi
 \makeatother
-%
 
 \endinput
 
