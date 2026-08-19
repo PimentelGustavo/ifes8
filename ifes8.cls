@@ -509,6 +509,7 @@
     \setheaderspaces{*}{0.1cm}{*}
     \setlength{\footskip}{2cm}
     \checkandfixthelayout[fixed]
+    \setlength{\headwidth}{\textwidth}
   }
 
   \fancyhf{}
