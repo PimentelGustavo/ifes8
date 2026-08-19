@@ -6,14 +6,25 @@
 %%%
 %%% Autor da classe ifes8: Prof. Jefferson O. Andrade <jefferson.andrade@ifes.edu.br>
 %%% Exemplo criado por Gustavo Cardoso Pimentel
-%%% Data de criação: 2026-08-12 | Data de atualização: 2026-08-13
+%%% Data de criação: 2026-08-12 | Data de atualização: 2026-08-18
 %%%
+%%% REVISÃO 2026-08-18:
+%%%  - \revistavolume passou a receber só o número do volume; o
+%%%    número da edição e o ano agora são campos próprios
+%%%    (\revistanumero, \revistaano). A classe compõe sozinha tanto a
+%%%    forma curta do cabeçalho corrente ("v.9n.1 2023") quanto a
+%%%    forma por extenso da capa ("Volume 9 / Number 1 / Year 2023").
+%%%  - Abstract/Keywords agora usam o ambiente `resumoabstract`, que
+%%%    garante página própria (mesmo que a capa varie de tamanho) e já
+%%%    aplica a fonte 11pt exigida pelo template .docx.
 %%% ============================================================
 
 \documentclass[revista,english,oneside]{ifes8}
 
 % ---------------- Dados do artigo ----------------
-\revistavolume{v.9n.1 2023}
+\revistavolume{9}
+\revistanumero{1}
+\revistaano{2023}
 \revistapaginas{XX-YY}
 \revistadoi{YYYYYY}
 \artigotitulo{PAPER TITLE}
@@ -30,13 +41,14 @@
 \imprimircaparevista
 
 \begin{graphicalabstract}
+
 \textbf{<Insert here image of the Graphical Abstract}
 
 \textbf{(texts within the images must be in English)>}
 
 \vspace{8mm}
 
-<Insert here the descriptive text of the Graphical Abstract (1 to 2 lines, in English)>
+\textbf{<Insert here the descriptive text of the Graphical Abstract (1 to 2 lines, in English)>}
 
 \vspace{4mm}
 
@@ -53,6 +65,7 @@ Author 2 (insert only after
 acceptance),\textsuperscript{2}\orcid{} and
 Author 3 (insert only after acceptance),\textsuperscript{1}
 
+\begin{OnehalfSpacing}
 \noindent \textsuperscript{1}Address. Remember that the smallest unit used must be the
 Department or Coordination (do not mention laboratory, group, postgraduate program
 etc.), then the Institute (if any), then the University. Use always full text. Example:
@@ -61,8 +74,9 @@ Mateus, 29032-540 São Mateus -- ES, Brazil.
 
 \noindent \textsuperscript{2} In case of authors from another institute or another
 campus of the institution, separate the authors by address.
+\end{OnehalfSpacing}
 
-\begin{flushright} * (insert the e-mail of the corresponding author) \end{flushright}
+\begin{flushright}{\fontsize{10}{12}\selectfont * (insert the e-mail of the corresponding author)}\end{flushright}
 
 \imprimirdatasartigo
 
@@ -72,11 +86,12 @@ campus of the institution, separate the authors by address.
 Fill in as the example below: ORCID -- João D. de Almeida:
 \url{https://orcid.org/0000-0012-3645-795X}
 
-\newpage
+%% ==================================================================
+%% PÁGINA 2 -- Abstract e Keywords (coluna única, fonte 11pt, página
+%% própria garantida pelo ambiente `resumoabstract` -- ver ifes8.cls)
+%% ==================================================================
+\begin{resumoabstract}
 
-%% ==================================================================
-%% PÁGINA 2 -- Abstract e Keywords (coluna única)
-%% ==================================================================
 \noindent\textbf{Abstract:} The abstract structure consists of a single paragraph,
 containing up to 250 words, Times New Roman font, size 11 - single spacing between
 lines, justified. The abstract text must represent the content of the research, covering
@@ -84,13 +99,13 @@ the paper proposal, objectives, theoretical foundation/discussion, methodologica
 procedures and main results. It should not include bibliographic references. The verb
 must be used in the active voice and in the third person singular (ABNT - NBR 6028).
 
-\vspace{4mm}
+\vspace{2mm}
 \noindent\textbf{Keywords}: Word(s) that represent(s) the content of the document and
 chosen from controlled vocabulary. Insert a maximum of five (5), written in lowercase
 letters (except in case of first names or abbreviations), written in the language of the
 text, separated by a semicolon and with a period after the last one.
 
-\newpage
+\end{resumoabstract}
 
 %% ==================================================================
 %% CORPO DO ARTIGO -- INTRODUÇÃO até REFERÊNCIAS (2 colunas)
