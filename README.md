@@ -98,7 +98,7 @@ Você pode editar e compilar seus documentos localmente no seu computador. Escol
 
 3. **Clone o repositório e compile:**
    ```bash
-   git clone https://github.com/gustavopimentel/ifes-tcc-norms.git
+   git clone https://github.com/PimentelGustavo/ifes8.git
    cd ifes-tcc-norms/ifes8/exemplo-tcc
    latexmk -pdf ifes8-tcc-ex.tex
    ```
@@ -132,7 +132,7 @@ Você pode editar e compilar seus documentos localmente no seu computador. Escol
 3. **Clone e Compile:**
    - Abra o Terminal do Git Bash ou o Prompt de Comando (CMD) e execute:
      ```cmd
-     git clone https://github.com/gustavopimentel/ifes-tcc-norms.git
+     git clone https://github.com/PimentelGustavo/ifes8.git
      ```
    - Abra a pasta do projeto no VS Code (`File` -> `Open Folder`).
    - Abra o arquivo `ifes8-tcc-ex.tex` ou `revista-ifes-ciencia-ex.tex`.
